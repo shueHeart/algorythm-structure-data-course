@@ -73,9 +73,12 @@ public class LinkedList
         
         while (node != null) {
             if(node.next != null && node.next.value == _value){
-                node.next = node.next.next;
-                if(node.next == null)
+               if(node.next.next != null)
+                    node.next = node.next.next;
+                else{
+                    node.next = null;
                     this.tail = node;
+                }
             }
             node = node.next;
         }
