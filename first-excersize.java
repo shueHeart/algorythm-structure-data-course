@@ -43,7 +43,7 @@ public class LinkedList
     public boolean remove(int _value)
     {
         Node node = this.head;
-        if(node.value == _value){      
+        if(node != null && node.value == _value){      
             this.head = node.next;          
             return true;
         }
@@ -66,7 +66,7 @@ public class LinkedList
     public void removeAll(int _value)
     {
         Node node = this.head;
-        if(node.value == _value){      
+        if(node != null && node.value == _value){      
             this.head = node.next;   
             node = node.next;
         }
