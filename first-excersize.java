@@ -37,7 +37,6 @@ public class LinkedList
                 nodes.add(node);
             node = node.next;
         }
-        // здесь будет ваш код поиска всех узлов
         return nodes;
     }
 
@@ -63,14 +62,12 @@ public class LinkedList
                 node.next == node.next.next;
             node = node.next
         }
-        // здесь будет ваш код удаления всех узлов по заданному значению
     }
 
     public void clear()
     {
         this.head = null;
         this.tail = null;
-        // здесь будет ваш код очистки всего списка
     }
 
     public int count()
@@ -81,28 +78,32 @@ public class LinkedList
             ++count;
             node = node.next
         }
-        return count; // здесь будет ваш код подсчёта количества элементов в списке
+        return count; 
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
-        // здесь будет ваш код вставки узла после заданного
         if(_nodeAfter != null) {
-            Node node = this.head;
-            while (node != null) {
-                if (node.equals(_nodeAfter)) {
-                    _nodeToInsert.next = node.next;
-                    node.next = _nodeToInsert;
-                    break;
+            if(this.head != null) {
+                Node node = this.head;
+            
+                while (node != null) {
+                    if (node.equals(_nodeAfter)) {
+                        _nodeToInsert.next = node.next;
+                        node.next = _nodeToInsert;
+                        break;
+                    }
                 }
-            }
+            }else 
+                this.head = _nodeToInsert
         }else{
-            _nodeToInsert.next = this.head;
-            this.head = _nodeToInsert.next;
+            if(this.head != null) {
+                _nodeToInsert.next = this.head;
+                this.head = _nodeToInsert.next;
+            }else
+                this.head = _nodeToInsert
         }
 
-        // если _nodeAfter = null ,
-        // добавьте новый элемент первым в списке
     }
 
 }
