@@ -81,7 +81,7 @@ public class LinkedList
         return count;
     }
 
-   public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
+    public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
         if(_nodeAfter != null) {
             if(this.head != null) {
