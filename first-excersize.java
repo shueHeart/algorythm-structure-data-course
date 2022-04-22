@@ -51,9 +51,10 @@ public class LinkedList
             if (node.next != null && node.next.value == _value) {
                 if(node.next.next != null)
                     node.next = node.next.next;
-                else
+                else{
                     node.next = null;
                     this.tail = node;
+                }
                 return true;
             }
             node = node.next;
