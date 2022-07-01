@@ -12,10 +12,14 @@ public class LinkedList
     }
 
     public void addInTail(Node item) {
-        if (this.head == null)
+    	
+        if (this.head == null) {
             this.head = item;
-        else
-            this.tail.next = item;
+        }
+        else {
+        	this.tail.next = item;
+        }
+            
         this.tail = item;
     }
 
@@ -48,39 +52,58 @@ public class LinkedList
             return true;
         }
         while (node != null) {
-            if (node.next != null && node.next.value == _value) {
-                if(node.next.next != null)
-                    node.next = node.next.next;
-                else{
-                    node.next = null;
-                    this.tail = node;
-                }
-                return true;
+        	
+            if (node.next == null) return false;
+            
+            if (node.next.value != _value) {
+            	node = node.next;
+            	continue;
             }
+            
+            if (node.next.next != null) node.next = node.next.next;
+            
+            if (node.next.next == null) {
+            	node.next = null;
+            	this.tail = node;
+            }
+            
             node = node.next;
+            
+            return true;
         }
         return false;
-        // delete one
     }
 
     public void removeAll(int _value)
     {
-        Node node = this.head;
-        if(node != null && node.value == _value){      
-            this.head = node.next;   
-            node = node.next;
-        }
         
+    	Node node = this.head;
+    	Node prev = null;
+    	
         while (node != null) {
-            if(node.next != null && node.next.value == _value){
-               if(node.next.next != null)
-                    node.next = node.next.next;
-                else{
-                    node.next = null;
-                    this.tail = node;
-                }
-            }
-            node = node.next;
+        	
+        	if (node.value != _value) {
+        		node = node.next;
+        		prev = node;
+        		continue;
+        	}
+        	
+        	if (prev == null) {
+        		this.head = node.next;
+        		continue;
+        	}
+        	
+        	if (node.next != null) {
+        		prev.next = node.next;
+        	}
+        	
+        	if (node.next == null) {
+        		prev.next = null;
+        		this.tail = node;
+        	}
+        	
+        	node = node.next;
+
         }
     }
 
