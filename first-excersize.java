@@ -83,13 +83,14 @@ public class LinkedList
         while (node != null) {
         	
         	if (node.value != _value) {
-        		node = node.next;
         		prev = node;
+        		node = node.next;
         		continue;
         	}
         	
         	if (prev == null) {
         		this.head = node.next;
+            	node = node.next;
         		continue;
         	}
         	
@@ -99,7 +100,7 @@ public class LinkedList
         	
         	if (node.next == null) {
         		prev.next = null;
-        		this.tail = node;
+        		this.tail = prev;
         	}
         	
         	node = node.next;
@@ -126,33 +127,39 @@ public class LinkedList
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
-        if(_nodeAfter != null) {
-            if(this.head != null) {
-                Node node = this.head;
-            
-                while (node != null) {
-                    if (node.equals(_nodeAfter)) {
-                        if(node.next != null){
-                            _nodeToInsert.next = node.next;
-                            node.next = _nodeToInsert;
-                            break;
-                        }else{
-                            node.next = _nodeToInsert;
-                            this.tail = _nodeToInsert;
-                            break;
-                        }
-                    }
-                }
-            }else 
-                this.head = _nodeToInsert;
-        }else{
-            if(this.head != null) {
-                _nodeToInsert.next = this.head;
-                this.head = _nodeToInsert.next;
-            }else
-                this.head = _nodeToInsert;
-        }
-
+    	 
+    	if (_nodeAfter == null) {
+    		_nodeToInsert.next = this.head;
+    		this.head = _nodeToInsert;
+    		return;
+    	}
+    	
+    	if (_nodeAfter.next != null) this.tail = _nodeToInsert;
+    	
+    	_nodeToInsert.next = _nodeAfter.next;
+    	_nodeAfter.next = _nodeToInsert;
+    }
+    
+    public LinkedList concat(LinkedList l1, LinkedList l2) {
+    	
+    	if (l1.count() != l2.count()) return null;
+    	
+    	LinkedList concated = new LinkedList();
+    	
+    	Node nodeFromFirst = l1.head;
+    	Node nodeFromSecond = l2.head;
+    	    	
+    	while (nodeFromFirst != null && nodeFromSecond != null) {
+    		
+    		concated.addInTail(new Node(nodeFromFirst.value + nodeFromSecond.value));
+    		
+    		nodeFromFirst = nodeFromFirst.next;
+    		nodeFromSecond = nodeFromSecond.next;
+    		
+    	}
+    	
+    	return concated;
+    	
     }
 
 }
