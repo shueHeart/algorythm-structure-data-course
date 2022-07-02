@@ -1,5 +1,3 @@
-package linkedlist;
-
 import java.util.*;
 
 public class LinkedList
@@ -50,9 +48,14 @@ public class LinkedList
     {
         Node node = this.head;
         if(node != null && node.value == _value){      
-            this.head = node.next;          
+            this.head = node.next;
+            
+            if (this.head == null) this.tail = null;
+
             return true;
         }
+        
+        
         while (node != null) {
         	
             if (node.next == null) return false;
@@ -93,6 +96,7 @@ public class LinkedList
         	if (prev == null) {
         		this.head = node.next;
             	node = node.next;
+            	
         		continue;
         	}
         	
@@ -108,6 +112,7 @@ public class LinkedList
         	node = node.next;
 
         }
+        if (this.head == null) this.tail = null;
     }
 
     public void clear()
@@ -156,3 +161,4 @@ class Node
         next = null;
     }
 }
+
