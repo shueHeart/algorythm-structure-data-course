@@ -138,10 +138,11 @@ public class LinkedList
     	if (_nodeAfter == null) {
     		_nodeToInsert.next = this.head;
     		this.head = _nodeToInsert;
+    		if (this.tail == null) this.tail = _nodeToInsert;
     		return;
     	}
     	
-    	if (_nodeAfter.next != null) this.tail = _nodeToInsert;
+    	if (_nodeAfter.next == null) this.tail = _nodeToInsert;
     	
     	_nodeToInsert.next = _nodeAfter.next;
     	_nodeAfter.next = _nodeToInsert;
@@ -161,4 +162,3 @@ class Node
         next = null;
     }
 }
-
