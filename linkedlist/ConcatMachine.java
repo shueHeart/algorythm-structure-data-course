@@ -6,7 +6,7 @@ public class ConcatMachine {
 	
 	LinkedList concated = new LinkedList();		
 		
-    	if (l1.count() != l2.count()) return new LinkedList();
+    	if (l1.count() != l2.count()) return concated;
 
     	Node nodeFromFirst = l1.head;
     	Node nodeFromSecond = l2.head;
