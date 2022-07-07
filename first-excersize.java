@@ -43,12 +43,21 @@ public class LinkedList
     public boolean remove(int _value)
     {
         Node node = this.head;
+        if(node != null && node.value == _value){      
+            this.head = node.next;          
+            return true;
+        }
         while (node != null) {
-            if (node.next.value == _value) {
-                node.next = node.next.next;
+            if (node.next != null && node.next.value == _value) {
+                if(node.next.next != null)
+                    node.next = node.next.next;
+                else{
+                    node.next = null;
+                    this.tail = node;
+                }
                 return true;
             }
-            node = node.next
+            node = node.next;
         }
         return false;
         // delete one
@@ -57,10 +66,21 @@ public class LinkedList
     public void removeAll(int _value)
     {
         Node node = this.head;
+        if(node != null && node.value == _value){      
+            this.head = node.next;   
+            node = node.next;
+        }
+        
         while (node != null) {
-            if(node.next.value == _value)
-                node.next == node.next.next;
-            node = node.next
+            if(node.next != null && node.next.value == _value){
+               if(node.next.next != null)
+                    node.next = node.next.next;
+                else{
+                    node.next = null;
+                    this.tail = node;
+                }
+            }
+            node = node.next;
         }
     }
 
@@ -76,9 +96,9 @@ public class LinkedList
         Node node = this.head;
         while(node != null) {
             ++count;
-            node = node.next
+            node = node.next;
         }
-        return count; 
+        return count;
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
@@ -89,19 +109,25 @@ public class LinkedList
             
                 while (node != null) {
                     if (node.equals(_nodeAfter)) {
-                        _nodeToInsert.next = node.next;
-                        node.next = _nodeToInsert;
-                        break;
+                        if(node.next != null){
+                            _nodeToInsert.next = node.next;
+                            node.next = _nodeToInsert;
+                            break;
+                        }else{
+                            node.next = _nodeToInsert;
+                            this.tail = _nodeToInsert;
+                            break;
+                        }
                     }
                 }
             }else 
-                this.head = _nodeToInsert
+                this.head = _nodeToInsert;
         }else{
             if(this.head != null) {
                 _nodeToInsert.next = this.head;
                 this.head = _nodeToInsert.next;
             }else
-                this.head = _nodeToInsert
+                this.head = _nodeToInsert;
         }
 
     }
