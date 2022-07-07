@@ -55,16 +55,22 @@ public class LinkedList2
 		
 		while (node != null) {
 			
-			if (node.value != _value) continue;
+			if (node.value != _value) {
+				node = node.next;
+				continue;
+			}
 			
 			if (node.next != null && node.prev != null)  {
-				node.prev = node.next;
+				node.prev.next = node.next;
+				node.next.prev = node.prev;
+				node = node.next;
 				return true;
 			}
 			
 			if (node.prev == null && node.next == null) {
 				this.head = null;
 				this.tail = null;
+				node = node.next;
 				return true;
 			}
 			
@@ -77,6 +83,8 @@ public class LinkedList2
 				node.prev.next = null;
 				this.tail = node.prev;
 			}
+			
+			node = node.next;
 			
 			return true;
 			
@@ -92,10 +100,15 @@ public class LinkedList2
     	 
     	 while (node != null) {
     		 
-    		 if (node.value != _value) continue;
+    		 if (node.value != _value) {
+    			 node = node.next;
+    			 continue;
+    		 }
     		 
     		 if (node.prev != null && node.next != null) {
-    			 node.prev = node.next;
+    			 node.prev.next = node.next;
+    			 node.next.prev = node.prev;
+    			 node = node.next;
     			 continue;
     		 }
     		 
@@ -114,7 +127,7 @@ public class LinkedList2
  				node.prev.next = null;
  				this.tail = node.prev;
  			}
-    		 
+ 			node = node.next;
     	 }
     	 
     	 
@@ -158,28 +171,30 @@ public class LinkedList2
 			return;
 		}
 		
-		if (_nodeAfter.equals(this.tail)) {
+		if (_nodeAfter.next == null) {
 			_nodeAfter.next = _nodeToInsert;
 			this.tail = _nodeToInsert;
 			return;
 		}
 		
 		_nodeToInsert.next  = _nodeAfter.next;
+		_nodeToInsert.next.prev = _nodeToInsert;
 		_nodeAfter.next = _nodeToInsert;
+
 		
 	}
 }
 
-//class Node
-//{
-//     public int value;
-//     public Node next;
-//     public Node prev;
-//
-//     public Node(int _value) 
-//     { 
-//       value = _value; 
-//       next = null;
-//       prev = null;
-//     }
-//}
+class Node
+{
+     public int value;
+     public Node next;
+     public Node prev;
+
+     public Node(int _value) 
+     { 
+       value = _value; 
+       next = null;
+       prev = null;
+     }
+}
