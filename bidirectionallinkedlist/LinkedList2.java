@@ -1,4 +1,3 @@
-package bidirectionallinkedlist;
 
 import java.util.*;
 
