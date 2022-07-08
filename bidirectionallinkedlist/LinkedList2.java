@@ -100,15 +100,15 @@ public class LinkedList2
 		while (node != null) {
 
 			if (node.value != _value) {
-			 node = node.next;
-			 continue;
+			 	node = node.next;
+			 	continue;
 			}
 
 			if (node.prev != null && node.next != null) {
-			 node.prev.next = node.next;
-			 node.next.prev = node.prev;
-			 node = node.next;
-			 continue;
+			 	node.prev.next = node.next;
+				node.next.prev = node.prev;
+			 	node = node.next;
+			 	continue;
 			}
 
 			if (node.prev == null && node.next == null) {
