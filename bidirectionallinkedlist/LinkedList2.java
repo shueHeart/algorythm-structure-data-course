@@ -31,6 +31,7 @@ public class LinkedList2
 
 		while (node != null) {
 			 if (node.value == _value) return node;
+			 node = node.next;
 		}
 
 		return null;
@@ -44,6 +45,7 @@ public class LinkedList2
 
 		while (node != null) {
 			if (node.value == _value) nodes.add(node);
+			node = node.next;
 		}
 		return nodes;
 	}
@@ -82,8 +84,6 @@ public class LinkedList2
 				node.prev.next = null;
 				this.tail = node.prev;
 			}
-			
-			node = node.next;
 			
 			return true;
 			
