@@ -1,4 +1,3 @@
-package dynarray;
 
 import java.util.*;
 
