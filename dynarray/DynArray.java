@@ -31,8 +31,7 @@ public class DynArray<T> {
 	}
 
 	public T getItem(int index) {
-		if (index < 0 || index > array.length)
-			return null;
+		if (index < 0 || index > count - 1) throw new RuntimeException("Index was out of range");
 
 		return array[index];
 	}
@@ -45,20 +44,20 @@ public class DynArray<T> {
 	}
 
 	public void insert(T itm, int index) {
-		if (index < 0 || index > capacity) {
+		if (index < 0 || index > count) {
 			throw new RuntimeException("Index was out of range");
 		}
 		
-		if (index + 1 > capacity) {
+		if (count + 1 > capacity) {
 			makeArray(capacity * 2);
 		}
 		
 		T[] copy = Arrays.copyOfRange(array, index, count);
-
+		
 		array[index] = itm;
 
-		for (int i = index + 1; i < copy.length; ++i) {
-			array[i] = copy[i - index + 1];
+		for (int i = index + 1; i < count + 1; ++i) {
+			array[i] = copy[i - (index + 1)];
 		}
 		++count;
 
@@ -66,17 +65,24 @@ public class DynArray<T> {
 
 	public void remove(int index) {
 
-		if (index < 0 || index > capacity) {
+		if (index < 0 || index > count - 1) {
 			throw new RuntimeException("Index was out of range");
 		}
 		
+		if (count == 1) {
+			array[0] = null;
+			--count;
+			makeArray(0);
+			return;
+		}
 		
 		T[] copy = Arrays.copyOfRange(array, index + 1, count);
-		for (int i = index; i < copy.length; ++i) {
-			array[i] = copy[i - index];
+		
+		for (int i = index; i < count - 1 ; ++i) {
+			array[i] = copy[i - index];				
 		}
 		--count;
-		
+
 		float squeez = capacity / count;
 
 		if (squeez <= 1.5) {
