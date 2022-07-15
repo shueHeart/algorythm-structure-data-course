@@ -56,10 +56,11 @@ public class DynArray<T> {
 		
 		array[index] = itm;
 
-		for (int i = index + 1; i < count + 1; ++i) {
+		++count;
+		for (int i = index + 1; i < count; ++i) {
 			array[i] = copy[i - (index + 1)];
 		}
-		++count;
+		
 
 	}
 
@@ -78,15 +79,18 @@ public class DynArray<T> {
 		
 		T[] copy = Arrays.copyOfRange(array, index + 1, count);
 		
-		for (int i = index; i < count - 1 ; ++i) {
+		array[count - 1] = null;
+		
+		--count;
+		for (int i = index; i < count; ++i) {
 			array[i] = copy[i - index];				
 		}
-		--count;
 
-		float squeez = capacity / count;
+		int squeez = capacity - (capacity / 2 + 1);
+		
 
-		if (squeez <= 1.5) {
-			int newcap = capacity / count;
+		if (count == squeez) {
+			int newcap = capacity * 2 / 3;
 			makeArray(newcap);
 		}
 	}
