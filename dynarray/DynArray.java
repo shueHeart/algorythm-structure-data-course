@@ -15,7 +15,7 @@ public class DynArray<T> {
 
 	public void makeArray(int new_capacity) {
 		
-		if (new_capacity < 16) return;
+		if (new_capacity < 16) new_capacity = 16;
 	
 		T[] forCopy = array;
 		array = (T[]) Array.newInstance(this.clazz, new_capacity);
@@ -27,7 +27,6 @@ public class DynArray<T> {
 			array[i] = forCopy[i]; 
 		}
 
-		capacity = new_capacity;
 	}
 
 	public T getItem(int index) {
