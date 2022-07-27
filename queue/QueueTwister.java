@@ -1,5 +1,8 @@
 package queue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QueueTwister {
 	public static void twist (Queue queue, int N) {
 		
@@ -30,5 +33,50 @@ public class QueueTwister {
 			queue.enqueue(tail.dequeue());
 		}
 		
+	}
+	
+	public static Stack doubleStackQueue (List elements) {
+		
+		Stack firstStack = new Stack();
+		
+		for (int i = 0; i < elements.size(); ++i) {
+			firstStack.push(elements.get(i));
+		}
+		
+		Stack secondStack = new Stack();
+		
+		while (firstStack.size() != 0) {
+			secondStack.push(firstStack.pop());
+		}
+		
+		return secondStack;
+	}
+}
+
+class Stack<T> {
+
+	public List<T> stack;
+	
+	public Stack() {
+		stack = new ArrayList<T>();
+	}
+
+	public int size() {
+		return stack.size();
+	}
+
+	public T pop() {
+		if (stack.size() == 0) return null;
+		
+		return stack.remove(stack.size() - 1);
+	}
+
+	public void push(T val) {
+		stack.add(val);
+	}
+
+	public T peek() {
+		if (stack.size() == 0) return null; 
+		return stack.get(stack.size() - 1);
 	}
 }
