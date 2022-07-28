@@ -1,5 +1,7 @@
 package deque;
 
+import java.util.*;
+
 public class PalindromChecker {
 
 	public static boolean isPalindrom (Deque deque) {
