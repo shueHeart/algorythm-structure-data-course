@@ -1,4 +1,3 @@
-package orderedlist;
 
 import java.util.*;
 
