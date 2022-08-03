@@ -23,8 +23,10 @@ public class OrderedList<T> {
 	}
 
 	public int compare(T v1, T v2) {
-		if (Integer.parseInt(v1.toString()) < Integer.parseInt(v2.toString())) return -1;
-		if (Integer.parseInt(v1.toString()) == Integer.parseInt(v2.toString())) return 0;
+		if (Integer.parseInt(v1.toString()) < Integer.parseInt(v2.toString()))
+			return -1;
+		if (Integer.parseInt(v1.toString()) == Integer.parseInt(v2.toString()))
+			return 0;
 		return 1;
 	}
 
@@ -35,50 +37,99 @@ public class OrderedList<T> {
 			tail = newNode;
 			return;
 		}
-		
+
 		Node<T> node = head;
-		
-		if (!_ascending) node = tail;
-		
+
 		while (node != null) {
-			
-			if (compare(newNode.value, node.value) == -1) {
-				if (_ascending) {
-					node.prev = newNode;
+			int compared = compare(node.value, newNode.value);
+
+			if (_ascending) {
+				switch (compared) {
+				case -1: {
+					
+					if (node.equals(tail)) {
+						newNode.prev = node;
+						node.next = newNode;
+						tail = newNode;
+						return;
+					}
+					node = node.next;
+
+					continue;
+				}
+				case 0: {
 					newNode.next = node;
-					head = newNode;
+					newNode.prev = node.prev;
+					node.prev = newNode;
+					if (newNode.prev == null) {
+						head = newNode;
+						return;
+					}
+					newNode.prev.next = newNode;
 					return;
 				}
-				node.next = newNode;
-				newNode.prev = node;
-				tail = newNode;
-				return;
+				case 1: {					
+					newNode.next = node;
+					newNode.prev = node.prev;
+					node.prev = newNode;
+					if (newNode.prev == null) {
+						head = newNode;
+						return;
+					}
+					newNode.prev.next = newNode;
+					return;
+					
+				}
+				}
+				
 			}
-			
-			if (compare(newNode.value, node.value) == 1 || compare(newNode.value, node.value) == 0) {
-				if (_ascending) {
-					newNode.next = node.next;
-					node.next = newNode;
+			switch (compared) {
+			case 1: {
+				
+				if (node.equals(tail)) {
 					newNode.prev = node;
+					node.next = newNode;
+					tail = newNode;
 					return;
 				}
+				node = node.next;
+
+				continue;
+			}
+			case 0: {
 				newNode.next = node;
 				newNode.prev = node.prev;
 				node.prev = newNode;
+				if (newNode.prev == null) {
+					head = newNode;
+					return;
+				}
+				newNode.prev.next = newNode;
 				return;
 			}
-			if (_ascending) {
-				node = node.next;
-				continue;
+			case -1: {					
+				newNode.next = node;
+				newNode.prev = node.prev;
+				node.prev = newNode;
+				if (newNode.prev == null) {
+					head = newNode;
+					return;
+				}
+				newNode.prev.next = newNode;
+				return;
+				
 			}
-			node = node.prev;
+			}
+			node = node.next;
+			
 		}
 	}
 
 	public Node<T> find(T val) {
 		Node<T> node = head;
 		while (node != null) {
-			if (node.value.equals(val)) return node;
+			if (node.value.equals(val))
+				return node;
 			node = node.next;
 		}
 		return null;
@@ -86,43 +137,43 @@ public class OrderedList<T> {
 
 	public void delete(T val) {
 		Node<T> node = this.head;
-		
+
 		while (node != null) {
-			
+
 			if (!node.value.equals(val)) {
 				node = node.next;
 				continue;
 			}
-			
-			if (node.next != null && node.prev != null)  {
+
+			if (node.next != null && node.prev != null) {
 				node.prev.next = node.next;
 				node.next.prev = node.prev;
 				node = node.next;
 				return;
 			}
-			
+
 			if (node.prev == null && node.next == null) {
 				this.head = null;
 				this.tail = null;
 				node = node.next;
 				return;
 			}
-			
+
 			if (node.prev == null) {
 				node.next.prev = null;
 				this.head = node.next;
 			}
-			
+
 			if (node.next == null) {
 				node.prev.next = null;
 				this.tail = node.prev;
 			}
-			
+
 			return;
-			
+
 		}
-		
-		return; 
+
+		return;
 	}
 
 	public void clear(boolean asc) {
@@ -133,19 +184,18 @@ public class OrderedList<T> {
 
 	public int count() {
 		Node<T> node = head;
-		
+
 		int count = 0;
-		
+
 		while (node != null) {
 			++count;
 			node = node.next;
 		}
-		
-		return count; 
+
+		return count;
 	}
 
-	ArrayList<Node<T>> getAll()
-	{
+	public ArrayList<Node<T>> getAll() {
 		ArrayList<Node<T>> r = new ArrayList<Node<T>>();
 		Node<T> node = head;
 		while (node != null) {
