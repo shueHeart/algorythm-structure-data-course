@@ -1,4 +1,3 @@
-package nativedictionary;
 
 import java.lang.reflect.Array;
 
