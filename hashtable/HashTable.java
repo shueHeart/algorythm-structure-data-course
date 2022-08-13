@@ -70,11 +70,31 @@ public class HashTable {
 	public int find(String value) {
 		int index = hashFun(value);
 		
-		if (slots[index] == null) return -1;
+		if (slots[index] != null && slots[index].equals(value)) return index;
 		
-		if (slots[index].equals(value)) return index;
+		int collisionIndex = index + step;
 		
-		return -1;
+		boolean circle = false;
+		if (collisionIndex >= size) {
+			circle = true;
+			collisionIndex = 0;
+		}
+		while (true) {
+
+			if (slots[collisionIndex] != null && slots[collisionIndex].equals(value)) return collisionIndex;
+				
+
+			collisionIndex += step;
+
+			if (circle && collisionIndex > index) return -1;
+
+			if (collisionIndex >= size) {
+				collisionIndex = 0;
+				circle = true;
+			}
+
+		}
 		
+				
 	}
 }
