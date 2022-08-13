@@ -31,27 +31,18 @@ public class HashTable {
 		if (slots[index] == null)
 			return index;
 
-		int collisionIndex = index + step;
-		boolean circle = false;
-		if (collisionIndex >= size) {
-			circle = true;
-			collisionIndex = 0;
-		}
-		while (true) {
-
-			if (slots[collisionIndex] == null)
-				return collisionIndex;
-
-			collisionIndex += step;
-
-			if (circle && collisionIndex > index) return -1;
-
+		int collisionIndex = index + 3;
+		while (collisionIndex != index) {
 			if (collisionIndex >= size) {
-				collisionIndex = 0;
-				circle = true;
+				collisionIndex = step - (collisionIndex - size);
 			}
-
+			if (slots[collisionIndex] == null) {
+				return collisionIndex;
+			}
+			collisionIndex += step;
 		}
+		
+		return -1;
 		
 	}
 
@@ -72,29 +63,17 @@ public class HashTable {
 		
 		if (slots[index] != null && slots[index].equals(value)) return index;
 		
-		int collisionIndex = index + step;
-		
-		boolean circle = false;
-		if (collisionIndex >= size) {
-			circle = true;
-			collisionIndex = 0;
-		}
-		while (true) {
-
-			if (slots[collisionIndex] != null && slots[collisionIndex].equals(value)) return collisionIndex;
-				
-
-			collisionIndex += step;
-
-			if (circle && collisionIndex > index) return -1;
-
+		int collisionIndex = index + 3;
+		while (collisionIndex != index) {
 			if (collisionIndex >= size) {
-				collisionIndex = 0;
-				circle = true;
+				collisionIndex = step - (collisionIndex - size);
 			}
-
+			if (slots[collisionIndex] == null) {
+				return collisionIndex;
+			}
+			collisionIndex += step;
 		}
 		
-				
+		return -1;				
 	}
 }
