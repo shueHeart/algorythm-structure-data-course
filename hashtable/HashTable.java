@@ -19,7 +19,6 @@ public class HashTable {
 		for (int i = 0; i < arr.length; ++i) {
 			sum += arr[i];
 		}
-
 		return sum % size;
 
 	}
@@ -31,13 +30,25 @@ public class HashTable {
 		if (slots[index] == null)
 			return index;
 
-		int collisionIndex = index + 3;
+		int collisionIndex = index;
+		
+		if (collisionIndex + step >= size) {
+			collisionIndex = collisionIndex + step - size;
+		}
+		else {
+			collisionIndex += step;
+		}
+		
 		while (collisionIndex != index) {
-			if (collisionIndex >= size) {
-				collisionIndex = step - (collisionIndex - size);
-			}
+	
+			
 			if (slots[collisionIndex] == null) {
 				return collisionIndex;
+			}
+			
+			if (collisionIndex + step >= size) {
+				collisionIndex = collisionIndex + step - size;
+				continue;
 			}
 			collisionIndex += step;
 		}
@@ -61,16 +72,27 @@ public class HashTable {
 	public int find(String value) {
 		int index = hashFun(value);
 		
-		if (slots[index] != null && slots[index].equals(value)) return index;
+		if (slots[index] != null && slots[index].equals(value)) {
+			return index;
+		}
 		
-		int collisionIndex = index + 3;
+		int collisionIndex = index;
+		if (collisionIndex + step >= size) {
+			collisionIndex = collisionIndex + step - size;
+		}
+		else {
+			collisionIndex += step;
+		}
 		while (collisionIndex != index) {
-			if (collisionIndex >= size) {
-				collisionIndex = step - (collisionIndex - size);
-			}
-			if (slots[collisionIndex] == null) {
+			
+			if (slots[collisionIndex] != null && slots[collisionIndex].equals(value)) {
 				return collisionIndex;
 			}
+			if (collisionIndex + step >= size) {
+				collisionIndex = collisionIndex + step - size;
+				continue;
+			}
+			
 			collisionIndex += step;
 		}
 		
