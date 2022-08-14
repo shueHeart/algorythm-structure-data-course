@@ -86,8 +86,39 @@ public class NativeDictionary<T> {
 	}
 
 	public void put(String key, T value) {
-		int index = seekSlot(key);
 		
+		if (isKey(key)) {
+			int index = hashFun(key);
+			if (key.equals(slots[index])) {
+				values[index] = value;
+				return;
+			}
+			
+			int collisionIndex = index;
+
+			if (collisionIndex + step >= size) {
+				collisionIndex = collisionIndex + step - size;
+			} else {
+				collisionIndex += step;
+			}
+
+			while (collisionIndex != index) {
+
+				if (key.equals(slots[collisionIndex])) {
+					values[collisionIndex] = value;
+					return;
+				}
+
+				if (collisionIndex + step >= size) {
+					collisionIndex = collisionIndex + step - size;
+					continue;
+				}
+				collisionIndex += step;
+			}
+		}
+		
+		int index = seekSlot(key);
+		if (index == -1) return;
 		slots[index] = key;
 		values[index] = value;
 		
