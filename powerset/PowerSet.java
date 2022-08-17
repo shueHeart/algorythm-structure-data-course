@@ -35,8 +35,14 @@ public class PowerSet {
 		
 		PowerSet ps = new PowerSet();
 		
-		ps.storage.addAll(storage);
-		ps.storage.addAll(set2.storage);
+		
+		for (String str : storage) {
+			ps.put(str);
+		}
+		
+		for (String str : set2.storage) {
+			ps.put(str);
+		}
 		
 		return ps;
 	}
