@@ -1,4 +1,3 @@
-package bloomfilter;
 
 public class BloomFilter {
 	public int filter_len;
