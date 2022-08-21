@@ -2,16 +2,14 @@
 public class BloomFilter {
 	public int filter_len;
 
-	public int[] bitArr;
+	public int bitArr;
 	
 	public int randNumForHash1 = 17;
 	public int randNumForHash2 = 223;
 
 	public BloomFilter(int f_len) {
 		filter_len = f_len;
-		for (int i = 0; i < f_len; ++i) {
-			bitArr[i] = 0;
-		}
+		bitArr = 0;
 	}
 
 	public int hash1(String str1)
@@ -43,21 +41,34 @@ public class BloomFilter {
 	}
 
 	public void add(String str1) {
-		int valHash1 = hash1(str1);
-		int valHash2 = hash1(str1);
 		
-		bitArr[valHash1] = 1;
-		bitArr[valHash2] = 1;
+		int index1 = hash1(str1);
+		int index2 = hash2(str1);
 		
+		int bits1 = (int) Math.pow(10, index1);
+		int bits2 = (int) Math.pow(10, index2);
+		
+		if (existsChecker(index1)) bitArr += bits1;
+		if (existsChecker(index2)) bitArr += bits2;
 	}
 
 	public boolean isValue(String str1) {
 		
-		int valHash1 = hash1(str1);
-		int valHash2 = hash1(str1);
+		int index1 = hash1(str1);
+		int index2 = hash1(str1);
 		
-		if (bitArr[valHash1] == 1 && bitArr[valHash2] == 1) return true;
-
-		return false;
+		return !existsChecker(index1) && !existsChecker(index2);
+		
+	}
+	
+	private boolean existsChecker(int index) {
+		
+		int arr = bitArr;
+		
+		for (int i = 0; i < index; ++i) {
+			arr = arr / 10; 
+		}
+		int digit = arr % 10;
+		return digit == 0;
 	}
 }
