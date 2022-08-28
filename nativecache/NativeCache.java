@@ -1,6 +1,5 @@
 package nativecache;
 
-import java.lang.reflect.Array;
 
 public class NativeCache<T> {
 	public int size;
