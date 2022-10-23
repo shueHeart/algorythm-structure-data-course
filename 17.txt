@@ -1,0 +1,203 @@
+Пример 1: Закомментированный код(11)
+
+	Был закомментирован целый метод - собственно, был мной удален:
+
+		// this.viewer.scene.input.on("mousewheel", () => {
+      		//   console.log("mousewheel", this.viewer.scene.camera.eyeLookDist);
+	      	//   this.setPosition(this.viewer.scene.camera.eyeLookDist)
+	      	// })
+	
+Пример 2: Закомментированный код(11)
+
+	Неиспользуемый блок else - убран: 
+
+		// else {
+           	//   let model = this.viewer.scene.models[rev.uuid]
+            	//   model.visible = true
+            	// }
+
+Пример 3: Закомментированный код(11)
+
+	Лишние конфигурационные данные - вырезаны:
+
+		// IfcWindow: {
+          	//   colorize: [0.2578125, 0.6953125, 0.84765625],
+         	//   opacity: 0.6
+         	// },
+
+          	// IfcPlate: {
+          	//   opacity: 0.6
+          	// },
+
+          	// default: {
+          	//   visible: true,
+          	//   opacity: 1,
+          	// }
+
+Пример 4: Закомментированный код(11)
+
+	Закомментированная реализация метода - удалена:	
+
+		//console.log(this.viewer.scene.models);
+		/*let allLoaded = true;
+
+	      	if (this.projectSettings.workModel.length == 0) allLoaded = false
+
+      		this.projectSettings.workModel.filter(e => e.switchon === true).forEach(e => {
+        		if (e.revisionUuid != null && !this.viewer.scene.models[e.revisionUuid]) {
+            			allLoaded = false
+        		} 
+      		})*/
+
+Пример 5: Закомментированный код(11)
+
+	Еще одна закомментированная реализация метода - удалена:	
+
+		// if( model ) {
+      		//   this.setSelectedModel(null)
+      		//   this.setSelectedModel(model)
+
+	      	//   this.viewer.scene.setObjectsPickable(this.viewer.scene.objectIds, false)
+        
+      		//   let modelObjectIds = this.viewer.scene.models[model.revisions.current?.uuid]?._nodeList.map(node => node.id) || []
+      		//   this.viewer.scene.setObjectsPickable(modelObjectIds, true)
+      		// }
+Пример 6: Закомментированный код(11)
+
+	Эти несколько строк когда-то сильно тормозили работу некоторых фич - когда нашли, 
+	в чем дело, их просто закомментировали, на память, похоже. Убрал.
+
+		// console.time('🤬 highlightSelected')
+      		// this.viewer.scene.setObjectsHighlighted(this.sceneObjectsIds, false)
+      		// this.viewer.scene.setObjectsHighlighted(this.selectedElements, true)
+      		// console.timeEnd('🤬 highlightSelected')
+
+Пример 7: Комментарий за закрывающей фигурной скобкой(6)
+
+	Этот комментарий был после фигурной скобки, закрывающей блок if - перенес его в начало, к условию:
+		// literal or match pair ?
+
+Пример 8: Закомментированный код(11)
+
+	Много неиспользуемого кода - удалено:
+	
+		// var material = viewer.scene.components['01___Default']
+
+		// var geometry = new ReadableGeometry(model, buildBoxGeometry({
+		// 	center: [0,0,0],
+		// 	xSize: 25,
+		// 	ySize: 25,
+		// 	zSize: 25
+		// }))
+
+
+		// const mesh = new Mesh(viewer.scene, {
+		// 	id:'thorus',
+		// 	isObject:true,
+		// 	pickable: true,
+		// 	geometry: geometry,
+		// 	material: material
+		// });
+
+		// model.addChild(mesh);
+
+Пример 9: Позиционный маркер(5)
+
+	Следующий комментарий:
+
+		// !!!!!!!! Костыль, желательно исправить по возможности
+
+	Был переделан в TODO, этот блок планируется переделывать, так что будет весьма кстати:
+
+		// TODO - решение явно костыльное - нужно придумать что-то более красивое
+
+
+Пример 10: Закомментированный код(11)
+
+	Неиспользуемая верстка - вырезана:
+		  
+		//- .text-right(v-bind:class="selectedOwner || selectedMarkerColor ? 'mt-3' : ''")
+		//-   v-chip.ma-2(v-if="selectedOwner" color="#757575" text-color="white" small label close @click:close="selectOwner(null)") {{ $t('project.owner') }}: 
+		//-     b.ml-1.mr-3 {{ selectedOwner.name }}
+		//-   v-chip.ma-2(v-if="selectedMarkerColor" color="#757575" text-color="white" small label close @click:close="selectMarkerColor(null)") {{ $t('project.marker') }}: 
+		//-     span.marker-color.ml-1.mr-3(v-bind:style="{ background: selectedMarkerColor.color }")
+
+Пример 11: Закомментированный код(11)
+
+	Неиспользуемое вычисляемое свойство - вырезано: 
+
+		// projectControls () {
+		//   return [
+		//     { icon:'remove_red_eye', title:'Открыть проект', action: () =>  this.openProject()},
+		//     { icon:'edit', title:'Редактировать', action: () =>  this.editProject()},
+		//     { icon:'delete', title:'Удалить', action: () =>  this.delProject()},
+		//   ]
+		// },
+		
+Пример 12: Закомментированный код(11)
+
+	Неиспользуемый метод - вырезан:
+
+		// projectActions(p){
+	    	//	this.edittableProject = JSON.parse(JSON.stringify(p))
+    		//   	this.edittableProject = p.clone()
+    		//   	this.dialog.actionProject = true
+    		// },
+
+Пример 13: Избыточный комментарий(7)
+
+	Следующий комментарий был просто убран за ненадобностью, название метода говорит само за себя:
+
+		// Множественный выбор элементов
+        	this.multipleElementsSelect(pickResult, this.viewer.scene)
+
+Пример 14: Избыточный комментарий(7)
+
+	Лишние комментарии - так же убраны за ненадобностью:
+
+		// Переход к списку классов
+    		viewBClasses() {
+      			this.$router.push({ path: `/admin/bclassificator/${this.formBClassificator.uuid}/classes`})
+	 	},
+
+		// Добавление
+    		addBClassificator () {
+      			this.formBClassificator = JSON.parse(JSON.stringify(this.defaultForm))
+      			this.dialog.addBClassificator = true
+    		},
+
+		// Управление
+    		actionBClassificator (bClassificator) {
+      			this.formBClassificator = JSON.parse(JSON.stringify(bClassificator))
+      			this.dialog.actionBClassificator = true
+    		},
+
+Пример 15: Закомментированный код(11)
+
+	Вырезан старый, закомментированный код:
+
+		// this.bars.map((bar) => {
+    			//   bar.sequence_bars = bar.task.dependencies
+    			//     .filter((dep) => dep.type.name === "SEQ")
+    			//     .map((dep) => this.get_bar(dep.task.uuid))
+    			//     .map((seq_bar) => {
+    			//       seq_bar.parent_connection = {
+    			//         parent: bar,
+    			//         type: "SEQ",
+    			//       };
+    			//       seq_bar.offset = seq_bar.$bar.getX() - bar.$bar.getX();
+    			//       return seq_bar;
+    			//     });
+    			//   bar.parallel_bars = bar.task.dependencies
+    			//     .filter((dep) => dep.type.name === "PAR")
+    			//     .map((dep) => this.get_bar(dep.task.uuid))
+    			//     .map((par_bar) => {
+    			//       par_bar.parent_connection = {
+		    	//         parent: bar,
+    			//         type: "PAR",
+    			//       };
+    			//       par_bar.offset = par_bar.$bar.getX() - bar.$bar.getX();
+			//       return par_bar;
+    			//     });
+    			//   bar.dependence_bars = bar.sequence_bars.concat(bar.parallel_bars);
+    		//});
