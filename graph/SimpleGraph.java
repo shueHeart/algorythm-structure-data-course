@@ -1,5 +1,3 @@
-package graph;
-
 
 class Vertex {
 	
